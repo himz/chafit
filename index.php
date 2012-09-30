@@ -19,19 +19,22 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <script src="js/bootstrap.min.js"></script>
 </head>
-<body>
+<body class="custom" style="background-color:#D0DFE9">
   
 <div class="page-header">
-  <h1>CharFit<small> - Get Fit or end up donating !</small></h1>
+  <h1><font style= "color: #B30606" >CharFit<font><small> - Get Fit or end up donating !</small></h1>
+  <h10><font color= "black" ><font></h10>
 </div>
   <div class = "row">
   
   <div class="span5 offset1">
   
   	<?php 
+    $t1=isset($token);
 	// If we have not received a token, display the link for Foursquare webauth
 	if(!isset($token)){ 
-		echo "<a href='".$foursquare->AuthenticationLink($redirect_uri)."'>Connect to this app via Foursquare</a>";
+
+		echo "<center><h1><a href='".$foursquare->AuthenticationLink($redirect_uri)."'>Connect to this app via Foursquare</a></h1></center>";
 	// Otherwise display the token
 	}else{
 		//echo "Your auth token: $token";
@@ -44,7 +47,7 @@
     for($i =0; $i<2; $i++){
     $params= array("beforeTimestamp" => $week[$i]['end'], "afterTimestamp" => $week[$i]['start'] );
     $response = $foursquare->GetPrivate("users/self/venuehistory",$params);
-    echo "<h2>Week ".($i + 1)."</h2>";
+    echo "<font color=black><h2>Week ".($i + 1)."</h2></font>";
     $result = json_decode($response);
     //var_dump($result);
     if(isset($result->response->venues->count)){
@@ -70,9 +73,9 @@
       <script>
       <!--
       function delay(){
-        window.location = "https://venmo.com/?txn=Pay&recipients=helpachild&amount=5&note=here%20is%20my%20lazy%20contribution%20for%20the%20charity";
+        window.location = "https://venmo.com/?txn=Pay&recipients=helpachild&amount=10&note=here%20is%20my%20lazy%20contribution%20for%20the%20charity";
       }
-      //setTimeout('delay()', 5000);
+      setTimeout('delay()', 5000);
 
       //-->
       </script>
@@ -85,15 +88,17 @@
 
 
 	}
-  echo "</div><div class='row'><h2>Results from Etsy</h2>";
-  $res = file_get_contents("http://openapi.etsy.com/v2/listings/active.json?keywords=gym&api_key=svo0qhuhxb7gfgwsqoe4rmpe");
-  $r = json_decode($res);
-  echo "<ul>";
-  foreach($r->results as $x){
-    echo "<li><a href='".$x->url."'>".$x->title."</a></li>";
-  }
-  echo "</ul>";
   
+    if($t1){ 
+    echo "</div><div class='row'></br></br></br></br><center><h2>Results from Etsy</h2></center>";
+    $res = file_get_contents("http://openapi.etsy.com/v2/listings/active.json?keywords=gym&api_key=svo0qhuhxb7gfgwsqoe4rmpe");
+    $r = json_decode($res);
+    echo "<ul>";
+    foreach($r->results as $x){
+      echo "<li><a href='".$x->url."'>".$x->title."</a></li>";
+    }
+    echo "</ul>";
+  }
 	
 	?>
 	  
