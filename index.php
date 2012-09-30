@@ -2,7 +2,7 @@
 	require_once("src/FoursquareAPI.class.php");
   $client_key = "YZLHSQNJSNU1234A042RK3QZDLWBE4ECBB5WF5MNSWRO5HZB";
 	$client_secret = "Q3NUPUWDB1OZKK3PZFF3YDKKCZK3XFDXEG5EDUXZ5PSQRY3B";
-  $redirect_uri="http://localhost/charfit/";
+  $redirect_uri="http://localhost/chafit/";
 	// Load the Foursquare API library
 	$foursquare = new FoursquareAPI($client_key,$client_secret);
   
