@@ -64,6 +64,8 @@
       echo "Sorry, you just went $times times :(. You need to pay now.";
       
       //sleep(10);
+      system("php src/twilio.php");
+      file_get_contents("http://localhost/chafit/src/tumblr.php");
       ?>
       <script>
       <!--
@@ -78,14 +80,23 @@
     }
     //echo "<hr/>";
     echo "</div><div class='span5 offset1'>";
-  }
-       echo "</div>";
+    }
+    echo "</div>";
 
 
 	}
+  echo "</div><div class='row'><h2>Results from Etsy</h2>";
+  $res = file_get_contents("http://openapi.etsy.com/v2/listings/active.json?keywords=gym&api_key=svo0qhuhxb7gfgwsqoe4rmpe");
+  $r = json_decode($res);
+  echo "<ul>";
+  foreach($r->results as $x){
+    echo "<li><a href='".$x->url."'>".$x->title."</a></li>";
+  }
+  echo "</ul>";
+  
 	
 	?>
-	  </div>
-
+	  
+</div>
 </body>
 </html>
